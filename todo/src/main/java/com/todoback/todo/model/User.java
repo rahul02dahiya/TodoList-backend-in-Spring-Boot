@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 public class User implements Serializable {
 	
 	@Id
@@ -29,3 +30,5 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<Category> category;
 }
+
+
