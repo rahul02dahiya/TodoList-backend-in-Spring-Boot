@@ -7,9 +7,9 @@ import com.todoback.todo.dto.TodoDto;
 public interface TodoService {
 	
 	TodoDto save(TodoDto todoDto);
-	void delete(int id);
-	TodoDto findById(int id);
-	List<TodoDto> findByCategory(int categoryId);
+	void delete(Long id);
+	TodoDto findById(Long id);
+	List<TodoDto> findByCategory(Long categoryId);
 	List<TodoDto> findAll();
 
 }

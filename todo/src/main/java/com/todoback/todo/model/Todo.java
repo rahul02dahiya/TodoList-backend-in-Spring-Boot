@@ -24,7 +24,7 @@ public class Todo implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private Long id;
 	private String title;
 	private String description;
 	private ZonedDateTime startTime;

@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.todoback.todo.model.Category;
 
-public interface CategoryRepo extends JpaRepository<Category, Integer> {
+public interface CategoryRepo extends JpaRepository<Category, Long> {
     List<Category> findCategoryByUserId(Long userId);
     
     @Query("select t.category.id from Todo t where t.id = :todoId")

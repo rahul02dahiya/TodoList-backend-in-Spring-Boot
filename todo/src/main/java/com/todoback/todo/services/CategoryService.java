@@ -7,10 +7,10 @@ import com.todoback.todo.dto.CategoryDto;
 public interface CategoryService {
 	
 	CategoryDto save(CategoryDto category);
-	void delete(int id);
-	List<CategoryDto> findAllByUserId(int userId);
-	CategoryDto findById(int id);
-	List<CategoryDto> getAllTodoByCategoriesForToday(int userId);
+	void delete(Long id);
+	List<CategoryDto> findAllByUserId(Long userId);
+	CategoryDto findById(Long id);
+	List<CategoryDto> getAllTodoByCategoriesForToday(Long userId);
 	List<CategoryDto> findAll();
 	
 }

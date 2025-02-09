@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class TodoDto {
 			
-		private int id;
+		private Long id;
 		private String title;
 		private String description;
 		private ZonedDateTime startTime;
@@ -42,7 +42,6 @@ public class TodoDto {
 		
 		public static TodoDto fromEntity(Todo todo) {
 			return todoDto.builder()
-		
 			.id(todo.setId())
 			.ttitle(todo.getTitle())
 			.description(todo.getDescription())
