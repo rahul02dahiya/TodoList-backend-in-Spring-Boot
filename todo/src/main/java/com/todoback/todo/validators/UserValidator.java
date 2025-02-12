@@ -11,7 +11,7 @@ public class UserValidator {
 		
         List<String> errors = new ArrayList<>();
         
-        if (user == null) {
+        if (userDto == null) {
             errors.add("Please fill the First name");
             errors.add("Please fill the Last name");
             errors.add("Please fill the user Email");

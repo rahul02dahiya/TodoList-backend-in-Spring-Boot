@@ -1,6 +1,7 @@
 package com.todoback.todo.servicesImpl;
 
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,13 @@ import com.todoback.todo.repositories.UserRepo;
 import com.todoback.todo.services.UserService;
 import com.todoback.todo.validators.UserValidator;
 
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
+
 public class UserServiceImpl implements UserService {
+	
+    private static final Logger log = Logger.getLogger(TodoServiceImpl.class.getName());
+
 	
 	@Autowired
 	private UserRepo userRepo; 
@@ -30,7 +33,7 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		List<String> errors = UserValidator.validateUser(userDto);
 		if(!errors.isEmpty()) {
-			log.error("User is not valid {}", userDto);
+			log.info("User is not valid ");
 			return null;			
 		}
         return UserDto.fromEntity(userRepo.save(UserDto.toEntity(userDto)));
@@ -41,7 +44,7 @@ public class UserServiceImpl implements UserService {
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		if (id==null) {
-			log.error("User id cannot be null");
+			log.info("User id cannot be null");
 			return;
 		}
 		userRepo.deleteById(id);
@@ -59,13 +62,13 @@ public class UserServiceImpl implements UserService {
 	public UserDto findById(Long id) {
 		// TODO Auto-generated method stub
 		if (id==null) {
-			log.error("User id cannot be null");
+			log.info("User id cannot be null");
 			return null;
 		}
 		return userRepo.findById(id)
                 .map(UserDto::fromEntity)
                 .orElseGet(() -> {
-                    log.error("No user found with ID = {}", id);
+                    log.info("No user found with ID ");
                     return null;
                 });
 	}
@@ -75,13 +78,13 @@ public class UserServiceImpl implements UserService {
         List<String> errors = UserValidator.validateUserCredentials(userDto.getEmail(), userDto.getPassword());
         
         if (!errors.isEmpty()) {
-            log.error("User credentials are not valid for user: {}", userDto);
+            log.info("User credentials are not valid for user");
             return null;
         }
 		return userRepo.findUserByEmailAndPassword(userDto.getEmail(), userDto.getPassword())
-				.map(userDto::fromEntity)
+				.map(UserDto::fromEntity)
 				.orElseGet(()->{
-					log.error("No user found with Email = {} and provided password", userDto.getEmail());
+					log.info("No user found with Email and provided password");
                     return null;
 				});
 	}

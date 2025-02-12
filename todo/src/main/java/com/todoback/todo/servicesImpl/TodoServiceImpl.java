@@ -1,4 +1,5 @@
 package com.todoback.todo.servicesImpl;
+import java.util.logging.Logger;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +17,11 @@ import com.todoback.todo.repositories.TodoRepo;
 import com.todoback.todo.services.TodoService;
 import com.todoback.todo.validators.TodoValidator;
 
-import lombok.extern.slf4j.Slf4j;
-
 
 @Service
-@Slf4j
 public class TodoServiceImpl implements TodoService {
+	
+    private static final Logger log = Logger.getLogger(TodoServiceImpl.class.getName());
 	
 	@Autowired
 	private TodoRepo todoRepo;
@@ -42,7 +42,7 @@ public class TodoServiceImpl implements TodoService {
 		// TODO Auto-generated method stub
 		List<String> errors = TodoValidator.validateTodo(todoDto);
 		if(!errors.isEmpty()) {
-			log.error("Todo is not valid {}",todoDto);
+			log.info("Todo is not valid");
 			return null;
 		}
 		return TodoDto.fromEntity(todoRepo.save(TodoDto.toEntity(todoDto)));
@@ -52,7 +52,7 @@ public class TodoServiceImpl implements TodoService {
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		if(id == null) {
-			log.error("Todo id is null");
+			log.info("Todo id is null");
 			return;
 		}
 		todoRepo.deleteById(id);
@@ -62,7 +62,7 @@ public class TodoServiceImpl implements TodoService {
 	public TodoDto findById(Long id) {
 		// TODO Auto-generated method stub
 		if (id==null) {
-			log.error("User id cannot be null");
+			log.info("User id cannot be null");
 			return null;
 		}
 
@@ -72,7 +72,7 @@ public class TodoServiceImpl implements TodoService {
 
 	        final Optional<Todo> todo = todoRepo.findById(id);
 	        if (!todo.isPresent()) {
-	            log.error("No Todo found with ID = {}", id);
+	            log.info("No Todo found with ID ");
 	            return null;
 	        }
 

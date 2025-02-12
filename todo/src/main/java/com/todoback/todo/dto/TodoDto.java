@@ -1,24 +1,11 @@
 package com.todoback.todo.dto;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 import com.todoback.todo.model.Todo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 public class TodoDto {
-			
+
 		private Long id;
 		private String title;
 		private String description;
@@ -26,30 +13,100 @@ public class TodoDto {
 		private boolean status;
 		private CategoryDto category;
 		
+		public TodoDto(Long id, String title, String description, ZonedDateTime startTime, boolean status,
+				CategoryDto category) {
+			super();
+			this.id = id;
+			this.title = title;
+			this.description = description;
+			this.startTime = startTime;
+			this.status = status;
+			this.category = category;
+		}
+
+			public TodoDto() {
+			super();
+		}
+		
+		public Long getId() {
+			return id;
+		}
+
+		public void setId(Long id) {
+			this.id = id;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public void setDescription(String description) {
+			this.description = description;
+		}
+
+		public ZonedDateTime getStartTime() {
+			return startTime;
+		}
+
+		public void setStartTime(ZonedDateTime startTime) {
+			this.startTime = startTime;
+		}
+
+		public boolean getStatus() {
+			return status;
+		}
+
+		public void setStatus(boolean status) {
+			this.status = status;
+		}
+
+		public CategoryDto getCategory() {
+			return category;
+		}
+
+		public void setCategory(CategoryDto category) {
+			this.category = category;
+		}
+
 		public static Todo toEntity(TodoDto todoDto) {
 			final Todo todo = new Todo();
 		
-			todo.setId(todoDto.setId());
-			todo.setTtitle(todoDto.getTitle());
+			todo.setId(todoDto.getId());
+			todo.setTitle(todoDto.getTitle());
 			todo.setDescription(todoDto.getDescription());
 			todo.setStartTime(todoDto.getStartTime());
 			todo.setStatus(todoDto.getStatus());
 			todo.setCategory(CategoryDto.toEntity(todoDto.getCategory()));
 			
-			
 			return todo;
 		}
 		
 		public static TodoDto fromEntity(Todo todo) {
-			return todoDto.builder()
-			.id(todo.setId())
-			.ttitle(todo.getTitle())
-			.description(todo.getDescription())
-			.startTime(tod.getStartTime())
-			.status(todo.getStatus())
-			.category(CategoryDto.fromEntity(todoDto.getCategory()))
-			.build();
 			
+			final TodoDto todoDto = new TodoDto();
+			
+			todoDto.setId(todo.getId());
+			todoDto.setTitle(todo.getTitle());
+			todoDto.setDescription(todo.getDescription());
+			todoDto.setStartTime(todo.getStartTime());
+			todoDto.setStatus(todo.getStatus());
+			todoDto.setCategory(CategoryDto.fromEntity(todo.getCategory()));
+			
+			return todoDto;
+		}
+
+		@Override
+		public String toString() {
+			return "TodoDto [id=" + id + ", title=" + title + ", description=" + description + ", startTime="
+					+ startTime + ", status=" + status + ", category=" + category + "]";
 		}
 		
 }

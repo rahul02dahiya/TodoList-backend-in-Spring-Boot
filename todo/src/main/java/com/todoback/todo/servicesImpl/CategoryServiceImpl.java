@@ -2,6 +2,7 @@ package com.todoback.todo.servicesImpl;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,11 @@ import com.todoback.todo.repositories.CategoryRepo;
 import com.todoback.todo.services.CategoryService;
 import com.todoback.todo.validators.CategoryValidator;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
+
 public class CategoryServiceImpl implements CategoryService {
+	
+    private static final Logger log = Logger.getLogger(TodoServiceImpl.class.getName());
 	
 	@Autowired
 	private CategoryRepo categoryRepo;
@@ -31,17 +32,17 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
         List<String> errors = CategoryValidator.validateCategory(categoryDto);
         if(!errors.isEmpty()) {
-        	log.error("Category is not valid {}", categoryDto);
+        	log.info("Category is not valid ");
         	return null;
         }
-        return CategoryDto.fromEntity(CategoryRepo.save(CategoryDto.toEntity(categoryDto)));
+        return CategoryDto.fromEntity(categoryRepo.save(CategoryDto.toEntity(categoryDto)));
 	}
 
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		 if (id == null) {
-	            log.error("Category id is null");
+	            log.info("Category id is null");
 	            return;
 	        }
 	        categoryRepo.deleteById(id);
@@ -59,12 +60,12 @@ public class CategoryServiceImpl implements CategoryService {
 	public CategoryDto findById(Long id) {
 		// TODO Auto-generated method stub
 		if (id == null) {
-            log.error("Category id is null");
+            log.info("Category id is null");
             return null;
         }
 		return categoryRepo.findById(id).map(CategoryDto::fromEntity)
 				.orElseGet(()->{
-					log.error("No category found with ID = {}", id);
+					log.info("No category found with ID");
                     return null;
 				});
 	}

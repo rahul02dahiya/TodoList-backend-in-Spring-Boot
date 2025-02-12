@@ -9,6 +9,7 @@ import com.todoback.todo.dto.TodoDto;
 
 public class TodoValidator {
 	
+	@SuppressWarnings("deprecation")
 	public static List<String> validateTodo(TodoDto todoDto) {
         List<String> errors = new ArrayList<>();
         if (todoDto == null) {
@@ -20,10 +21,10 @@ public class TodoValidator {
         if (StringUtils.isEmpty(todoDto.getTitle())) {
             errors.add("Please fill the title");
         }
-        if (StringUtils.isEmpty(todoDto.getDescription)) {
+        if (StringUtils.isEmpty(todoDto.getDescription())) {
             errors.add("Please fill the description");
         }
-        if (StringUtils.isEmpty(todoDto.getCategory)) {
+        if (StringUtils.isEmpty(todoDto.getCategory())) {
             errors.add("Please select a category");
         }
         return errors;
