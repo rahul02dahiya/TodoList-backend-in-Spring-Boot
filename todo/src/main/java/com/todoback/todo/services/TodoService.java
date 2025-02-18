@@ -2,14 +2,15 @@ package com.todoback.todo.services;
 
 import java.util.List;
 
-import com.todoback.todo.dto.TodoDto;
+import com.todoback.todo.model.Todo;
+
 
 public interface TodoService {
 	
-	TodoDto save(TodoDto todoDto);
+	Todo save(Todo Todo);
 	void delete(Long id);
-	TodoDto findById(Long id);
-	List<TodoDto> findByCategory(Long categoryId);
-	List<TodoDto> findAll();
+	Todo findById(Long id);
+	List<Todo> findByCategory(Long categoryId);
+	List<Todo> findAllTodo();
 
 }

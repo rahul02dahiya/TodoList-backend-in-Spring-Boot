@@ -3,12 +3,11 @@ package com.todoback.todo.servicesImpl;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.todoback.todo.dto.CategoryDto;
+import com.todoback.todo.model.Category;
 import com.todoback.todo.repositories.CategoryRepo;
 import com.todoback.todo.services.CategoryService;
 import com.todoback.todo.validators.CategoryValidator;
@@ -28,42 +27,40 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryDto save(CategoryDto categoryDto) {
+	public Category save(Category category) {
 		// TODO Auto-generated method stub
-        List<String> errors = CategoryValidator.validateCategory(categoryDto);
+        List<String> errors = CategoryValidator.validateCategory(category);
         if(!errors.isEmpty()) {
-        	log.info("Category is not valid ");
+        	log.info("category is not valid ");
         	return null;
         }
-        return CategoryDto.fromEntity(categoryRepo.save(CategoryDto.toEntity(categoryDto)));
+        return categoryRepo.save(category);
 	}
 
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		 if (id == null) {
-	            log.info("Category id is null");
+	            log.info("category id is null");
 	            return;
 	        }
 	        categoryRepo.deleteById(id);
 	}
 
 	@Override
-	public List<CategoryDto> findAllByUserId(Long userId) {
+	public List<Category> findAllByUserId(Long userId) {
 		// TODO Auto-generated method stub
-		 return categoryRepo.findCategoryByUserId(userId).stream()
-	                .map(CategoryDto::fromEntity)
-	                .collect(Collectors.toList());
+		 return categoryRepo.findCategoryByUserId(userId);
 	}
 
 	@Override
-	public CategoryDto findById(Long id) {
+	public Category findById(Long id) {
 		// TODO Auto-generated method stub
 		if (id == null) {
-            log.info("Category id is null");
+            log.info("category id is null");
             return null;
         }
-		return categoryRepo.findById(id).map(CategoryDto::fromEntity)
+		return categoryRepo.findById(id)
 				.orElseGet(()->{
 					log.info("No category found with ID");
                     return null;
@@ -71,21 +68,16 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryDto> getAllTodoByCategoriesForToday(Long userId) {
+	public List<Category> getAllTodoByCategoriesForToday(Long userId) {
 		// TODO Auto-generated method stub
 		 return categoryRepo.getAllTodoByCategoriesForToday(ZonedDateTime.now().withHour(0).withMinute(0),
-	                ZonedDateTime.now().withHour(23).withMinute(59), userId)
-	                .stream()
-	                .map(CategoryDto::fromEntity)
-	                .collect(Collectors.toList());
+	                ZonedDateTime.now().withHour(23).withMinute(59), userId);
 	}
 
 	@Override
-	public List<CategoryDto> findAll() {
+	public List<Category> findAllCategory() {
 		// TODO Auto-generated method stub
-		return categoryRepo.findAll().stream()
-                .map(CategoryDto::fromEntity)
-                .collect(Collectors.toList());
+		return categoryRepo.findAll();
 	}
 
 }

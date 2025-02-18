@@ -1,6 +1,5 @@
 package com.todoback.todo.controllers;
 
-import com.todoback.todo.dto.UserDto;
 import com.todoback.todo.model.User;
 import com.todoback.todo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +20,22 @@ public class UserController {
 	}
 
 	@PostMapping("/save")
-    public UserDto saveUser(@RequestBody UserDto userDto) {
-        return userService.save(userDto);
+    public User saveUser(@RequestBody User user) {
+        return userService.save(user);
     }
 
     @GetMapping("/all")
     public List<User> getAllUsers() {
-        return userService.getAllUser();
+        return userService.findAllUser();
     }
 
     @GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
         return userService.findById(id);
     }
 
     @PostMapping("/login")
-    public UserDto loginUser(@RequestBody UserDto user) {
+    public User loginUser(@RequestBody User user) {
         return userService.login(user);
     }
 

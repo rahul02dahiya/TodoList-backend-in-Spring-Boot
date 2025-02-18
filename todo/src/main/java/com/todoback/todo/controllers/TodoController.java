@@ -1,6 +1,6 @@
 package com.todoback.todo.controllers;
 
-import com.todoback.todo.dto.TodoDto;
+import com.todoback.todo.model.Todo;
 import com.todoback.todo.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,22 +21,22 @@ public class TodoController {
 	}
 
 	@PostMapping("/save")
-    public TodoDto saveTodo(@RequestBody TodoDto todoDto) {
-        return todoService.save(todoDto);
+    public Todo saveTodo(@RequestBody Todo todo) {
+        return todoService.save(todo);
     }
 
     @GetMapping("/all")
-    public List<TodoDto> getAllTodos() {
-        return todoService.findAll();
+    public List<Todo> getAllTodos() {
+        return todoService.findAllTodo();
     }
 
     @GetMapping("/{id}")
-    public TodoDto getTodoById(@PathVariable Long id) {
+    public Todo getTodoById(@PathVariable Long id) {
         return todoService.findById(id);
     }
 
     @GetMapping("/category/{categoryId}")
-    public List<TodoDto> getTodosByCategory(@PathVariable Long categoryId) {
+    public List<Todo> getTodosByCategory(@PathVariable Long categoryId) {
         return todoService.findByCategory(categoryId);
     }
 

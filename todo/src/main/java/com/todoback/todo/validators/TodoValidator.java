@@ -5,26 +5,25 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.todoback.todo.dto.TodoDto;
+import com.todoback.todo.model.Todo;
 
 public class TodoValidator {
 	
-	@SuppressWarnings("deprecation")
-	public static List<String> validateTodo(TodoDto todoDto) {
+	public static List<String> validateTodo(Todo todo) {
         List<String> errors = new ArrayList<>();
-        if (todoDto == null) {
+        if (todo == null) {
             errors.add("Please fill the title");
             errors.add("Please fill the description");
             errors.add("Please select a category");
             return errors;
         }
-        if (StringUtils.isEmpty(todoDto.getTitle())) {
+        if (StringUtils.isEmpty(todo.getTitle())) {
             errors.add("Please fill the title");
         }
-        if (StringUtils.isEmpty(todoDto.getDescription())) {
+        if (StringUtils.isEmpty(todo.getDescription())) {
             errors.add("Please fill the description");
         }
-        if (StringUtils.isEmpty(todoDto.getCategory())) {
+        if (StringUtils.isEmpty(todo.getCategory())) {
             errors.add("Please select a category");
         }
         return errors;

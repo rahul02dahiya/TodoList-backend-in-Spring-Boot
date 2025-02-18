@@ -3,13 +3,10 @@ import java.util.logging.Logger;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.todoback.todo.dto.CategoryDto;
-import com.todoback.todo.dto.TodoDto;
 import com.todoback.todo.model.Category;
 import com.todoback.todo.model.Todo;
 import com.todoback.todo.repositories.CategoryRepo;
@@ -38,14 +35,14 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public TodoDto save(TodoDto todoDto) {
+	public Todo save(Todo todo) {
 		// TODO Auto-generated method stub
-		List<String> errors = TodoValidator.validateTodo(todoDto);
+		List<String> errors = TodoValidator.validateTodo(todo);
 		if(!errors.isEmpty()) {
 			log.info("Todo is not valid");
 			return null;
 		}
-		return TodoDto.fromEntity(todoRepo.save(TodoDto.toEntity(todoDto)));
+		return todoRepo.save(todo);
 	}
 
 	@Override
@@ -59,7 +56,7 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public TodoDto findById(Long id) {
+	public Todo findById(Long id) {
 		// TODO Auto-generated method stub
 		if (id==null) {
 			log.info("User id cannot be null");
@@ -77,26 +74,22 @@ public class TodoServiceImpl implements TodoService {
 	        }
 
 	        todo.get().setCategory(category);
-	        TodoDto todoDto = TodoDto.fromEntity(todo.get());
-	        todoDto.setCategory(CategoryDto.fromEntity(category));
+	        Todo Todo = todo.get();
+	        Todo.setCategory(category);
 
-	        return todoDto;
+	        return Todo;
 	}
 
 	@Override
-	public List<TodoDto> findByCategory(Long categoryId) {
+	public List<Todo> findByCategory(Long categoryId) {
 		// TODO Auto-generated method stub
-		return todoRepo.findTodoByCategoryId(categoryId).stream()
-                .map(TodoDto::fromEntity)
-                .collect(Collectors.toList());
+		return todoRepo.findTodoByCategoryId(categoryId);
 	}
 
 	@Override
-	public List<TodoDto> findAll() {
+	public List<Todo> findAllTodo() {
 		// TODO Auto-generated method stub
-		return todoRepo.findAll().stream()
-				.map(TodoDto::fromEntity)
-				.collect(Collectors.toList());
+		return todoRepo.findAll();
 	}
 
 
