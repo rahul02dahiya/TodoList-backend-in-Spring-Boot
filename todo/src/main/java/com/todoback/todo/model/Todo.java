@@ -2,7 +2,7 @@ package com.todoback.todo.model;
 
 import java.time.ZonedDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,7 +37,7 @@ public class Todo{
 	
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
-	@JsonIgnore
+	@JsonBackReference
 	private Category category;
 	
 	public Todo(String title, String description, ZonedDateTime startTime, boolean status) {
