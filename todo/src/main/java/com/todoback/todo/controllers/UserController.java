@@ -1,6 +1,7 @@
 package com.todoback.todo.controllers;
 
 import com.todoback.todo.dto.UserDto;
+import com.todoback.todo.model.User;
 import com.todoback.todo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public List<UserDto> getAllUsers() {
-        return userService.findAll();
+    public List<User> getAllUsers() {
+        return userService.getAllUser();
     }
 
     @GetMapping("/{id}")

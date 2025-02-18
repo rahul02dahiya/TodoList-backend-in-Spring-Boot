@@ -19,13 +19,14 @@ public class TodoDto {
 			this.id = id;
 			this.title = title;
 			this.description = description;
-			this.startTime = startTime;
+	        this.startTime = (startTime != null) ? startTime : ZonedDateTime.now();
 			this.status = status;
 			this.category = category;
 		}
 
 			public TodoDto() {
 			super();
+			this.startTime = ZonedDateTime.now();
 		}
 		
 		public Long getId() {
@@ -82,7 +83,7 @@ public class TodoDto {
 			todo.setId(todoDto.getId());
 			todo.setTitle(todoDto.getTitle());
 			todo.setDescription(todoDto.getDescription());
-			todo.setStartTime(todoDto.getStartTime());
+	        todo.setStartTime(todoDto.getStartTime() != null ? todoDto.getStartTime() : ZonedDateTime.now());
 			todo.setStatus(todoDto.getStatus());
 			todo.setCategory(CategoryDto.toEntity(todoDto.getCategory()));
 			

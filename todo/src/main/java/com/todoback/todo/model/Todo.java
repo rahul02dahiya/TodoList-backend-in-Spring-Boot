@@ -10,13 +10,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Todo{
 
 	public Todo() {
 		super();
+		this.startTime = ZonedDateTime.now();
 	}
+	
+	@PrePersist
+    protected void onCreate() {
+        if (this.startTime == null) {
+            this.startTime = ZonedDateTime.now();
+        }
+    }
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +44,7 @@ public class Todo{
 		super();
 		this.title = title;
 		this.description = description;
-		this.startTime = startTime;
+		this.startTime = ZonedDateTime.now();
 		this.status = status;
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.todoback.todo.dto.UserDto;
+import com.todoback.todo.model.User;
 import com.todoback.todo.repositories.UserRepo;
 import com.todoback.todo.services.UserService;
 import com.todoback.todo.validators.UserValidator;
@@ -57,6 +58,8 @@ public class UserServiceImpl implements UserService {
                 .map(UserDto::fromEntity)
                 .collect(Collectors.toList());
 	}
+	
+	
 
 	@Override
 	public UserDto findById(Long id) {
@@ -87,6 +90,12 @@ public class UserServiceImpl implements UserService {
 					log.info("No user found with Email and provided password");
                     return null;
 				});
+	}
+
+	@Override
+	public List<User> getAllUser() {
+		// TODO Auto-generated method stub
+		return userRepo.findAll();
 	}
 
 }
