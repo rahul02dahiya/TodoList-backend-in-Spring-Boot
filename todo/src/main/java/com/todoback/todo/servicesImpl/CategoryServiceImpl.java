@@ -1,6 +1,5 @@
 package com.todoback.todo.servicesImpl;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -65,13 +64,6 @@ public class CategoryServiceImpl implements CategoryService {
 					log.info("No category found with ID");
                     return null;
 				});
-	}
-
-	@Override
-	public List<Category> getAllTodoByCategoriesForToday(Long userId) {
-		// TODO Auto-generated method stub
-		 return categoryRepo.getAllTodoByCategoriesForToday(ZonedDateTime.now().withHour(0).withMinute(0),
-	                ZonedDateTime.now().withHour(23).withMinute(59), userId);
 	}
 
 	@Override

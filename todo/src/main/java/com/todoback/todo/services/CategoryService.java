@@ -10,7 +10,6 @@ public interface CategoryService {
 	void delete(Long id);
 	List<Category> findAllByUserId(Long userId);
 	Category findById(Long id);
-	List<Category> getAllTodoByCategoriesForToday(Long userId);
 	List<Category> findAllCategory();
 	
 }

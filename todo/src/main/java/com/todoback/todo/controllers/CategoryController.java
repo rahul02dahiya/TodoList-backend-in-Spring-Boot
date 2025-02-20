@@ -39,11 +39,6 @@ public class CategoryController {
         return categoryService.findAllByUserId(userId);
     }
 
-    @GetMapping("/today/{userId}")
-    public List<Category> getAllTodoByCategoriesForToday(@PathVariable Long userId) {
-        return categoryService.getAllTodoByCategoriesForToday(userId);
-    }
-
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id) {
         categoryService.delete(id);
