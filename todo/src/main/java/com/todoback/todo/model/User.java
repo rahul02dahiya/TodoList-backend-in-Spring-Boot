@@ -1,14 +1,14 @@
 package com.todoback.todo.model;
 
-import java.util.List;
+//import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+//import jakarta.persistence.OneToMany;
 
 @Entity
 public class User{
@@ -21,9 +21,9 @@ public class User{
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy = "user")
-	@JsonManagedReference
-	private List<Category> category;
+//	@OneToMany(mappedBy = "user")
+//	@JsonManagedReference
+//	private List<Category> category;
 	
 	public User() {
 		super();
@@ -77,18 +77,18 @@ public class User{
 		this.password = password;
 	}
 
-	public List<Category> getCategory() {
-		return category;
-	}
-
-	public void setCategory(List<Category> category) {
-		this.category = category;
-	}
+//	public List<Category> getCategory() {
+//		return category;
+//	}
+//
+//	public void setCategory(List<Category> category) {
+//		this.category = category;
+//	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", category=" + category + "]";
+				+ ", password=" + password + "]";
 	}
 	
 }

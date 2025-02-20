@@ -2,8 +2,6 @@ package com.todoback.todo.model;
 
 import java.time.ZonedDateTime;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,9 +35,23 @@ public class Todo{
 	
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
-	@JsonBackReference
+//	@JsonBackReference
 	private Category category;
 	
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	//@JsonBackReference
+	private User user;
+	
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Todo(String title, String description, ZonedDateTime startTime, boolean status) {
 		super();
 		this.title = title;
