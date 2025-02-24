@@ -2,6 +2,8 @@ package com.todoback.todo.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,7 @@ public class Category{
 	private User user;
 	
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+	@JsonManagedReference
 	private List<Todo> todoList;
 	
 	public Category(String name, String description) {

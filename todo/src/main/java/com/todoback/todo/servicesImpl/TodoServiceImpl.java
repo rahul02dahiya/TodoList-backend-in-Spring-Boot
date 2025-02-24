@@ -92,5 +92,27 @@ public class TodoServiceImpl implements TodoService {
 		return todoRepo.findAll();
 	}
 
+	@Override
+	public Todo update(Todo todo, Long id) {
+		// TODO Auto-generated method stub
+		List<String> errors = TodoValidator.validateTodo(todo);
+		if(!errors.isEmpty()) {
+			log.info("Todo is not valid");
+			return null;
+		}
+		todo.setId(id);
+		return todoRepo.save(todo);
+	}
+
+	@Override
+	public void updateStatus(Boolean status, Long id) {
+		 Optional<Todo> existingTodo = todoRepo.findById(id);
+	        if (existingTodo.isPresent()) {
+	            Todo todo = existingTodo.get();
+	            todo.setStatus(status);
+	            todoRepo.save(todo);
+	        }
+	}
+
 
 }
